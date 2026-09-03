@@ -227,6 +227,19 @@
 
   footer{ padding: 30px 48px; border-top: 1px solid var(--line); display:flex; justify-content:space-between; font-size: 0.78rem; color: var(--sand-dim); flex-wrap:wrap; gap:10px; }
 
+  .back-to-top{
+    position: fixed; right: 24px; bottom: 24px; z-index: 60;
+    display:flex; align-items:center; gap: 8px;
+    background: var(--foam); color: var(--abyss); border: none;
+    padding: 12px 18px; border-radius: 40px; font-size: 0.85rem; font-family:'Work Sans', sans-serif;
+    cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+  }
+  .back-to-top.visible{ opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover{ background: var(--clay-light); }
+  .back-to-top .btt-icon{ font-size: 1.1rem; line-height: 1; }
+
   @media print{
     body{ background: #fff !important; color: #1a1a1a !important; }
     nav, .hero-silt, .depth-tag, .cta-btn{ background: transparent !important; }
@@ -261,6 +274,7 @@
     .grade-head{ display:none; }
     .dest-grid{ grid-template-columns: repeat(2,1fr); }
     footer{ padding: 24px; }
+    .back-to-top{ right: 16px; bottom: 16px; padding: 10px 14px; font-size: 0.8rem; }
   }
 </style>
 </head>
@@ -319,8 +333,8 @@
         </div>
         <div class="zone" data-depth="1">
           <span class="z-index" data-en="8–18 meters — reef drop-off" data-zh="8–18米——礁石陡坡">8–18 meter — tubir karang</span>
-          <h3 data-en="Pineapple &amp; Teatfish Sea Cucumber" data-zh="凤梨参与白乳参">Teripang Nanas &amp; Teripang Susu</h3>
-          <p data-en="Attaches to branching coral crevices. Harvesting requires experienced divers and only happens during calm-water season, March to October." data-zh="附着在分枝珊瑚的缝隙中，采捕需要经验丰富的潜水员，且只在3月至10月的平静水域季节进行。">Menempel di celah karang bercabang. Pengambilannya memerlukan penyelam berpengalaman dan hanya dilakukan pada musim air tenang, Maret hingga Oktober.</p>
+          <h3 data-en="Long-Spined Gondrong Sea Cucumber" data-zh="毛刺参">Teripang Duri Gondrong</h3>
+          <p data-en="Attaches to branching coral crevices with its long, shaggy spines. Harvesting requires experienced divers and only happens during calm-water season, March to October." data-zh="以长刺附着在分枝珊瑚的缝隙中，采捕需要经验丰富的潜水员，且只在3月至10月的平静水域季节进行。">Menempel di celah karang bercabang dengan duri panjang menyerupai rambut gondrong. Pengambilannya memerlukan penyelam berpengalaman dan hanya dilakukan pada musim air tenang, Maret hingga Oktober.</p>
         </div>
         <div class="zone" data-depth="2">
           <span class="z-index" data-en="20–40 meters — outer slope" data-zh="20–40米——外礁斜坡">20–40 meter — lereng luar</span>
@@ -352,23 +366,23 @@
       <div class="grade-row">
         <div class="g-photo"></div>
         <span class="g-num">02</span>
-        <span class="g-name" data-en="Pineapple Sea Cucumber<span>Thelenota ananas</span>" data-zh="凤梨参<span>Thelenota ananas</span>">Teripang Nanas<span>Thelenota ananas</span></span>
-        <span class="g-desc" data-en="Coarse texture with its signature soft spines; large size makes it ideal for whole-piece presentation." data-zh="质地粗犷，带有标志性的软刺；体型大，适合整只呈现。">Bertekstur kasar dengan duri lembut khas, ukuran besar sehingga cocok untuk penyajian utuh.</span>
+        <span class="g-name" data-en="Long-Spined Gondrong Sea Cucumber<span>Bohadschia vitiensis</span>" data-zh="毛刺参<span>Bohadschia vitiensis</span>">Teripang Duri Gondrong<span>Bohadschia vitiensis</span></span>
+        <span class="g-desc" data-en="Covered in long, shaggy spines resembling unruly hair; large size and firm texture, popular in the Chinese culinary market." data-zh="表面覆盖着如乱发般的长刺，体型大、肉质紧实，深受中国餐饮市场青睐。">Permukaannya dipenuhi duri panjang menyerupai rambut gondrong; ukuran besar dan tekstur kenyal, diminati pasar kuliner Tiongkok.</span>
         <span class="g-grade">Grade A</span>
       </div>
       <div class="grade-row">
         <div class="g-photo"></div>
         <span class="g-num">03</span>
-        <span class="g-name" data-en="Teatfish Sea Cucumber<span>Holothuria fuscogilva</span>" data-zh="白乳参<span>Holothuria fuscogilva</span>">Teripang Susu<span>Holothuria fuscogilva</span></span>
-        <span class="g-desc" data-en="Whitish color with high collagen content. Sought after by the cosmetics industry as well as culinary buyers." data-zh="颜色偏白，胶原蛋白含量高，深受化妆品行业与餐饮买家青睐。">Warna keputihan, kadar kolagen tinggi. Diminati industri kosmetik selain kuliner.</span>
-        <span class="g-grade">Grade A</span>
+        <span class="g-name" data-en="Golden Gamat<span>Stichopus hermanni</span>" data-zh="金玉参<span>Stichopus hermanni</span>">Teripang Gamat<span>Stichopus hermanni</span></span>
+        <span class="g-desc" data-en="Rich in nutrients and long trusted to support wound healing; the most sought-after species for the health extract industry." data-zh="营养丰富，长期被认为有助于伤口愈合，是保健萃取产业最受欢迎的品种。">Kaya nutrisi dan dipercaya sejak lama membantu pemulihan luka; jenis paling dicari untuk industri ekstrak kesehatan.</span>
+        <span class="g-grade" data-en="Extract" data-zh="萃取级">Ekstrak</span>
       </div>
       <div class="grade-row">
         <div class="g-photo"></div>
         <span class="g-num">04</span>
-        <span class="g-name" data-en="Golden Gamat<span>Liquid extract</span>" data-zh="金玉参<span>液体萃取</span>">Gamat Emas<span>Ekstrak cair</span></span>
-        <span class="g-desc" data-en="Processed fresh without full drying, packaged as a wound-care and immunity supplement." data-zh="新鲜加工，不完全晾干，包装成伤口护理与免疫力保健品。">Diproses segar tanpa pengeringan penuh, dikemas sebagai suplemen luka dan daya tahan tubuh.</span>
-        <span class="g-grade" data-en="Extract" data-zh="萃取液">Ekstrak</span>
+        <span class="g-name" data-en="Koro Sea Cucumber<span>Holothuria atra</span>" data-zh="乌参<span>Holothuria atra</span>">Teripang Koro<span>Holothuria atra</span></span>
+        <span class="g-desc" data-en="Dark colored with a chewy texture; commonly processed into crackers and dried seafood snacks besides the culinary export market." data-zh="颜色深、口感有嚼劲，除了出口餐饮市场外，也常被加工成海产脆片与干货零食。">Berwarna gelap dengan tekstur kenyal; umum diolah menjadi kerupuk dan camilan laut kering selain untuk pasar ekspor kuliner.</span>
+        <span class="g-grade">Grade B</span>
       </div>
     </div>
   </div>
@@ -485,6 +499,10 @@
   <span data-en="CITES &amp; SNI Fisheries Certified" data-zh="通过CITES与印尼国家标准（SNI）渔业认证">Bersertifikat CITES &amp; SNI Perikanan</span>
 </footer>
 
+<button type="button" id="backToTop" class="back-to-top" aria-label="Home">
+  <span class="btt-icon">⌂</span><span class="btt-label" data-en="Home" data-zh="首页">Home</span>
+</button>
+
 <script>
   const zones = document.querySelectorAll('.zone');
   const markers = document.querySelectorAll('.depth-marker');
@@ -529,6 +547,19 @@
 
   langSpans.forEach(s=>{
     s.addEventListener('click', ()=> setLang(s.dataset.lang));
+  });
+
+  // Tombol Home — muncul setelah scroll ke bawah, klik untuk kembali ke atas halaman
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 400){
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+  backToTop.addEventListener('click', ()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   // Wajib bagikan lokasi sebelum tombol WhatsApp / email aktif
