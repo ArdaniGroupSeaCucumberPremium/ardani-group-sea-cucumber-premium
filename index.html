@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teripang Nusantara — Hasil Laut Dalam</title>
+<title>Ardani Group Sea Cucumber Premium — Hasil Laut Dalam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --abyss: #081815;
-    --deep: #12302B;
-    --mid-teal: #24473F;
-    --sand: #EFE7D4;
-    --sand-dim: #D9CFB6;
-    --clay: #8A6841;
-    --clay-light: #B98F5D;
-    --foam: #9FC2AE;
-    --line: rgba(239,231,212,0.16);
+    --abyss: #071223;
+    --deep: #0F2A4A;
+    --mid-teal: #1B3F66;
+    --sand: #E9F1F7;
+    --sand-dim: #C3D3E2;
+    --clay: #4A7FB5;
+    --clay-light: #6FA8DC;
+    --foam: #8FC1E3;
+    --line: rgba(233,241,247,0.16);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -68,8 +68,8 @@
     position: relative;
     padding: 0 48px 90px;
     background:
-      radial-gradient(ellipse 900px 600px at 80% 15%, rgba(159,194,174,0.10), transparent 60%),
-      linear-gradient(180deg, #0A211C 0%, var(--abyss) 55%, #050F0D 100%);
+      radial-gradient(ellipse 900px 600px at 80% 15%, rgba(143,193,227,0.12), transparent 60%),
+      linear-gradient(180deg, #0B2444 0%, var(--abyss) 55%, #040B18 100%);
     border-bottom: 1px solid var(--line);
   }
   .hero-silt{
@@ -182,6 +182,15 @@
   .proses-item p{ font-size: 0.92rem; line-height: 1.75; color: var(--sand-dim); }
 
   /* JANGKAUAN */
+  /* TESTIMONI */
+  .testimoni{ padding: 140px 0; }
+  .testi-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line); border: 1px solid var(--line); }
+  .testi-card{ background: var(--abyss); padding: 40px 32px; display:flex; flex-direction:column; justify-content:space-between; gap: 28px; }
+  .testi-quote{ font-family:'Fraunces', serif; font-style: italic; font-size: 1.05rem; line-height: 1.65; color: var(--sand); }
+  .testi-who{ display:flex; flex-direction:column; gap: 4px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .testi-name{ font-size: 0.92rem; color: var(--foam); }
+  .testi-role{ font-size: 0.78rem; color: var(--sand-dim); }
+
   .jangkauan{ background: var(--deep); padding: 140px 0; border-top: 1px solid var(--line); }
   .dest-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 60px; }
   .dest{ border-top: 1px solid var(--line); padding-top: 18px; }
@@ -232,8 +241,9 @@
   @media (max-width: 860px){
     .wrap{ padding: 0 24px; }
     nav{ padding: 20px 24px; }
-    .nav-right{ gap: 16px; }
-    nav ul{ gap: 18px; font-size: 0.75rem; }
+    .nav-right{ gap: 10px; }
+    nav ul{ gap: 12px; font-size: 0.68rem; }
+    nav ul li, nav a{ white-space: nowrap; }
     .lang-toggle{ font-size: 0.68rem; }
     .lang-toggle span{ padding: 4px 9px; }
     .hero{ padding: 0 24px 60px; }
@@ -243,6 +253,7 @@
     .depth-label{ font-size: 0; }
     .zone-list{ gap: 90px; }
     .proses-grid{ grid-template-columns: 1fr; }
+    .testi-grid{ grid-template-columns: 1fr; }
     .grade-row{ grid-template-columns: 64px 1fr; row-gap: 8px; }
     .grade-row .g-photo{ width: 64px; height: 64px; grid-row: 1 / 4; }
     .grade-row .g-num, .grade-row .g-name, .grade-row .g-desc, .grade-row .g-grade{ grid-column: 2; }
@@ -255,12 +266,13 @@
 <body>
 
 <nav>
-  <div class="brandmark">TERIPANG <em>Nusantara</em></div>
+  <div class="brandmark">ARDANI GROUP <em>Sea Cucumber Premium</em></div>
   <div class="nav-right">
     <ul>
       <li><a href="#zona" data-en="Habitat" data-zh="栖息地">Habitat</a></li>
       <li><a href="#produk" data-en="Products" data-zh="产品">Produk</a></li>
       <li><a href="#proses" data-en="Process" data-zh="工艺">Proses</a></li>
+      <li><a href="#testimoni" data-en="Testimonials" data-zh="客户评价">Testimoni</a></li>
       <li><a href="#kontak" data-en="Contact" data-zh="联系我们">Kontak</a></li>
     </ul>
     <div class="lang-toggle" id="langToggle">
@@ -387,6 +399,38 @@
   </div>
 </section>
 
+<section class="testimoni" id="testimoni">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-en="What our buyers say" data-zh="买家怎么说">Apa kata para pembeli</h2>
+      <p data-en="A few words from restaurants and distributors we've shipped to." data-zh="来自我们合作过的餐厅与批发商的几句话。">Beberapa kata dari restoran dan distributor yang sudah menerima kiriman kami.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p class="testi-quote" data-en="&quot;The sandfish grade arrived exactly as described — thick flesh, clean drying, no salty smell. Our regular supplier now.&quot;" data-zh="&quot;沙参的品质和描述完全一致——肉质厚实，晾晒干净，没有异味。现在已经是我们固定的供应商。&quot;">"Teripang pasirnya sampai persis seperti dijanjikan — daging tebal, kering bersih, tidak bau amis. Sekarang jadi pemasok tetap kami."</p>
+        <div class="testi-who">
+          <span class="testi-name">Restoran Kanton Bahagia</span>
+          <span class="testi-role" data-en="Restaurant, Hong Kong" data-zh="餐厅，香港">Restoran, Hong Kong</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote" data-en="&quot;Fast response on WhatsApp, and the price quote came with clear grade photos. Made ordering in bulk much easier.&quot;" data-zh="&quot;WhatsApp回复很快，报价还附上清晰的等级照片，让大批量订购轻松许多。&quot;">"Respon di WhatsApp cepat, dan penawaran harganya langsung disertai foto tiap grade. Jadi lebih gampang order dalam jumlah besar."</p>
+        <div class="testi-who">
+          <span class="testi-name">Toko Obat Tradisional Sejahtera</span>
+          <span class="testi-role" data-en="Distributor, Singapore" data-zh="批发商，新加坡">Distributor, Singapura</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote" data-en="&quot;We switched to their Gamat extract for our supplement line — consistent quality batch after batch.&quot;" data-zh="&quot;我们把保健品系列改用他们的金玉参萃取——每批品质都很稳定。&quot;">"Kami beralih ke ekstrak Gamat mereka untuk lini suplemen kami — kualitasnya konsisten dari batch ke batch."</p>
+        <div class="testi-who">
+          <span class="testi-name">Herbal Nusantara Wellness</span>
+          <span class="testi-role" data-en="Health supplement manufacturer, Taiwan" data-zh="保健品生产商，台湾">Produsen suplemen kesehatan, Taiwan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="jangkauan">
   <div class="wrap">
     <div class="sec-head">
@@ -497,8 +541,8 @@
   const waBtn = document.getElementById('waBtn');
   const emailBtn = document.getElementById('emailBtn');
 
-  const WA_NUMBER = '6281200000000';
-  const EMAIL_ADDR = 'ekspor@teripangnusantara.id';
+  const WA_NUMBER = '6285205332047';
+  const EMAIL_ADDR = 'ArdaniGroup20@gmail.com';
 
   // GANTI dengan URL Web App dari Google Apps Script Anda (lihat panduan yang disertakan).
   // Biarkan string kosong '' kalau belum mau mengaktifkan pencatatan ke Google Sheet.
