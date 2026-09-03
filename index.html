@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teripang Nusantara — Hasil Laut Dalam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --abyss: #081815;
+    --deep: #12302B;
+    --mid-teal: #24473F;
+    --sand: #EFE7D4;
+    --sand-dim: #D9CFB6;
+    --clay: #8A6841;
+    --clay-light: #B98F5D;
+    --foam: #9FC2AE;
+    --line: rgba(239,231,212,0.16);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--abyss);
+    color: var(--sand);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .display{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  a{color:inherit;}
+  ::selection{ background: var(--clay); color: var(--abyss); }
+  h1,h2,h3,p,span,a,div{ overflow-wrap: break-word; word-break: break-word; }
+  .grade-row, .grade-head, .proses-grid, .dest-grid, .nav-right, nav ul{ min-width: 0; }
+  .grade-row > *, .grade-head > *{ min-width: 0; }
+
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+
+  /* NAV */
+  nav{
+    position: fixed; top:0; left:0; right:0; z-index: 50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 28px 48px; flex-wrap: wrap; row-gap: 10px;
+    mix-blend-mode: difference;
+  }
+  .brandmark{ font-family:'Fraunces', serif; font-size: 1.05rem; letter-spacing: 0.02em; }
+  .brandmark em{ font-style: italic; color: var(--foam); }
+  .nav-right{ display:flex; align-items:center; gap: 34px; }
+  nav ul{ list-style:none; display:flex; gap: 34px; font-size: 0.85rem; }
+  nav a{ text-decoration:none; opacity: 0.85; }
+  nav a:hover{ opacity: 1; }
+  .lang-toggle{
+    display:flex; align-items:center; border: 1px solid var(--line);
+    border-radius: 30px; padding: 3px; font-size: 0.72rem; cursor:pointer;
+    user-select:none;
+  }
+  .lang-toggle span{ padding: 5px 12px; border-radius: 20px; transition: background 0.2s ease, color 0.2s ease; }
+  .lang-toggle span.active{ background: var(--foam); color: var(--abyss); }
+
+  /* HERO */
+  .hero{
+    min-height: 100vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    position: relative;
+    padding: 0 48px 90px;
+    background:
+      radial-gradient(ellipse 900px 600px at 80% 15%, rgba(159,194,174,0.10), transparent 60%),
+      linear-gradient(180deg, #0A211C 0%, var(--abyss) 55%, #050F0D 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-silt{
+    position:absolute; inset:0; pointer-events:none; opacity:0.5;
+    background-image: radial-gradient(1px 1px at 20% 30%, rgba(239,231,212,0.35), transparent),
+      radial-gradient(1px 1px at 65% 55%, rgba(239,231,212,0.25), transparent),
+      radial-gradient(1.5px 1.5px at 40% 80%, rgba(239,231,212,0.3), transparent),
+      radial-gradient(1px 1px at 85% 25%, rgba(239,231,212,0.2), transparent),
+      radial-gradient(1px 1px at 10% 65%, rgba(239,231,212,0.25), transparent),
+      radial-gradient(1.5px 1.5px at 92% 70%, rgba(239,231,212,0.3), transparent);
+  }
+  .hero-eyebrow{
+    font-size: 0.82rem; color: var(--foam); margin-bottom: 22px; max-width: 480px;
+    line-height: 1.6; font-weight: 400;
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 7vw, 5.6rem);
+    line-height: 1.02;
+    max-width: 15ch;
+    color: var(--sand);
+  }
+  .hero h1 .i{ font-style: italic; color: var(--clay-light); }
+
+  /* Penyesuaian saat bahasa Inggris aktif — teks EN cenderung lebih panjang,
+     jadi ukuran & lebar disesuaikan supaya jumlah baris tetap mirip versi ID */
+  html[lang="en"] .hero h1{ font-size: clamp(2.2rem, 6vw, 4.7rem); max-width: 18ch; }
+  html[lang="en"] .hero-desc{ max-width: 430px; }
+  html[lang="en"] .hero-eyebrow{ max-width: 540px; }
+  html[lang="en"] .sec-head h2{ font-size: clamp(1.6rem, 3vw, 2.35rem); }
+  .hero-foot{
+    display:flex; justify-content: space-between; align-items:flex-end;
+    margin-top: 46px; gap: 30px; flex-wrap: wrap;
+  }
+  .hero-desc{ max-width: 380px; font-size: 0.98rem; line-height: 1.7; color: var(--sand-dim); }
+  .depth-tag{
+    font-size: 0.78rem; color: var(--foam); border: 1px solid var(--line);
+    padding: 10px 16px; border-radius: 24px; max-width: 260px;
+  }
+
+  /* SECTION HEADERS */
+  .sec-head{ display:flex; justify-content:space-between; align-items:flex-end; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+  .sec-head h2{ font-size: clamp(1.8rem, 3.4vw, 2.6rem); max-width: 20ch; }
+  .sec-head p{ max-width: 360px; font-size: 0.95rem; line-height: 1.7; color: var(--sand-dim); }
+
+  /* ZONA LAUT — depth narrative */
+  .zones{ padding: 150px 0; position: relative; }
+  .zones-inner{ display:flex; gap: 60px; }
+  .depth-rail{
+    width: 92px; flex-shrink:0; position: relative;
+  }
+  .depth-rail-line{
+    position: sticky; top: 140px;
+    height: 70vh;
+    width: 1px; background: var(--line); margin-left: 40px; position:relative;
+  }
+  .depth-marker{
+    position: absolute; left: -5px; width: 11px; height: 11px; border-radius: 50%;
+    background: var(--mid-teal); border: 1px solid var(--foam);
+    transition: background 0.4s ease, transform 0.4s ease;
+  }
+  .depth-marker.active{ background: var(--clay-light); transform: scale(1.3); }
+  .depth-label{
+    position:absolute; left: 22px; top: -7px; font-size: 0.72rem; color: var(--sand-dim);
+    white-space: nowrap; opacity: 0.6; transition: opacity 0.3s ease, color 0.3s ease;
+  }
+  .depth-label.active{ opacity: 1; color: var(--foam); }
+
+  .zone-list{ flex:1; display:flex; flex-direction:column; gap: 130px; }
+  .zone{ max-width: 640px; }
+  .zone .z-index{ font-size: 0.78rem; color: var(--clay-light); margin-bottom: 14px; display:block; }
+  .zone h3{ font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin-bottom: 18px; }
+  .zone p{ font-size: 1rem; line-height: 1.8; color: var(--sand-dim); max-width: 54ch; }
+  .zone p + p{ margin-top: 14px; }
+
+  /* PRODUK */
+  .produk{ background: var(--deep); padding: 140px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .grade-table{ border-top: 1px solid var(--line); }
+  .grade-row{
+    display:grid; grid-template-columns: 96px 60px 1.3fr 1.6fr 90px;
+    gap: 28px; padding: 30px 0; border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .grade-row .g-num{ font-family:'Fraunces', serif; font-size: 1.1rem; color: var(--clay-light); }
+  .grade-row .g-name{ font-size: 1.25rem; font-family:'Fraunces', serif; font-weight: 500; }
+  .grade-row .g-name span{ display:block; font-family:'Work Sans', sans-serif; font-size: 0.8rem; color: var(--sand-dim); font-weight: 300; margin-top: 4px; }
+  .grade-row .g-desc{ font-size: 0.92rem; line-height: 1.7; color: var(--sand-dim); }
+  .grade-row .g-grade{ font-size: 0.78rem; text-align: right; color: var(--foam); }
+  .grade-head{
+    display:grid; grid-template-columns: 96px 60px 1.3fr 1.6fr 90px; gap: 28px;
+    padding-bottom: 18px; font-size: 0.75rem; color: var(--sand-dim); opacity: 0.6;
+  }
+  /* Slot foto produk — taruh <img src="nama-file-anda.jpg" alt="..."> di dalam div.g-photo */
+  .g-photo{
+    width: 96px; height: 96px; overflow: hidden; flex-shrink:0;
+    background: var(--mid-teal);
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid var(--line);
+  }
+  .g-photo img{ width:100%; height:100%; object-fit: cover; display:block; }
+  .g-photo:empty::after{
+    content: '+ foto'; font-size: 0.7rem; color: var(--sand-dim); letter-spacing: 0.02em;
+  }
+
+  /* PROSES */
+  .proses{ padding: 140px 0; }
+  .proses-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line); border: 1px solid var(--line); }
+  .proses-item{ background: var(--abyss); padding: 44px 34px; }
+  .proses-item .p-mark{ font-family:'Fraunces', serif; font-style: italic; color: var(--foam); font-size: 1.6rem; margin-bottom: 22px; display:block; }
+  .proses-item h3{ font-size: 1.15rem; margin-bottom: 14px; font-weight: 500; }
+  .proses-item p{ font-size: 0.92rem; line-height: 1.75; color: var(--sand-dim); }
+
+  /* JANGKAUAN */
+  .jangkauan{ background: var(--deep); padding: 140px 0; border-top: 1px solid var(--line); }
+  .dest-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 60px; }
+  .dest{ border-top: 1px solid var(--line); padding-top: 18px; }
+  .dest .d-country{ font-family:'Fraunces', serif; font-size: 1.2rem; }
+  .dest .d-use{ font-size: 0.82rem; color: var(--sand-dim); margin-top: 8px; line-height: 1.6; }
+
+  /* CTA / CONTACT */
+  .contact{ padding: 160px 0 100px; text-align: left; }
+  .contact h2{ font-size: clamp(2rem, 5vw, 3.6rem); max-width: 16ch; margin-bottom: 40px; }
+  .contact-row{ display:flex; justify-content:space-between; gap: 40px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 40px; }
+  .contact-block{ font-size: 0.92rem; line-height: 1.9; color: var(--sand-dim); }
+  .contact-block strong{ color: var(--sand); display:block; font-weight: 500; margin-bottom: 8px; font-family:'Fraunces', serif; font-size: 1rem; }
+  .cta-btn{
+    display:inline-block; margin-top: 6px; padding: 15px 30px; border: 1px solid var(--foam);
+    border-radius: 40px; font-size: 0.88rem; text-decoration:none; color: var(--sand);
+    transition: background 0.25s ease, color 0.25s ease; white-space: nowrap;
+  }
+  .cta-btn:hover{ background: var(--foam); color: var(--abyss); }
+  .cta-group{ display:flex; flex-direction:column; gap: 12px; align-items:flex-start; }
+  .cta-label{ font-family:'Fraunces', serif; font-weight: 500; font-size: 1rem; color: var(--sand); margin-bottom: 2px; }
+  .cta-hint{ font-size: 0.8rem; color: var(--clay-light); line-height: 1.6; max-width: 320px; margin-bottom: 4px; }
+  .cta-loc-btn{ background: transparent; border-style: dashed; white-space: normal; text-align: left; max-width: 340px; line-height: 1.4; }
+  .cta-loc-btn.loc-done{ border-style: solid; border-color: var(--foam); }
+  .loc-status{ font-size: 0.78rem; color: var(--sand-dim); min-height: 1.2em; }
+  .loc-status.ok{ color: var(--foam); }
+  .loc-status.error{ color: #d98a6a; }
+  .loc-proof{ font-size: 0.8rem; color: var(--sand-dim); }
+  .loc-proof a{ color: var(--foam); text-decoration: underline; }
+  .loc-proof .coords{ font-family: monospace; color: var(--sand); }
+  .cta-disabled{ opacity: 0.35; pointer-events: none; cursor: not-allowed; }
+  .cta-btn-solid{ background: var(--foam); color: var(--abyss); border-color: var(--foam); }
+  .cta-btn-solid:hover{ background: transparent; color: var(--foam); }
+
+  footer{ padding: 30px 48px; border-top: 1px solid var(--line); display:flex; justify-content:space-between; font-size: 0.78rem; color: var(--sand-dim); flex-wrap:wrap; gap:10px; }
+
+  @media print{
+    body{ background: #fff !important; color: #1a1a1a !important; }
+    nav, .hero-silt, .depth-tag, .cta-btn{ background: transparent !important; }
+    nav{ mix-blend-mode: normal !important; color: #1a1a1a !important; }
+    .hero, .produk, .jangkauan, .proses-item{ background: #fff !important; border-color: #ccc !important; }
+    h1, h2, h3, .display, .brandmark, .g-num, .g-name, .z-index, .d-country, .p-mark{ color: #0d1f1c !important; }
+    .hero-desc, .zone p, .g-desc, .dest .d-use, .proses-item p, .contact-block, .sec-head p{ color: #333 !important; }
+    .depth-tag, .cta-btn{ border-color: #333 !important; color: #1a1a1a !important; }
+    .depth-marker{ background: #333 !important; }
+    footer{ color: #333 !important; }
+  }
+
+  @media (max-width: 860px){
+    .wrap{ padding: 0 24px; }
+    nav{ padding: 20px 24px; }
+    .nav-right{ gap: 16px; }
+    nav ul{ gap: 18px; font-size: 0.75rem; }
+    .lang-toggle{ font-size: 0.68rem; }
+    .lang-toggle span{ padding: 4px 9px; }
+    .hero{ padding: 0 24px 60px; }
+    .zones-inner{ gap: 24px; }
+    .depth-rail{ width: 40px; }
+    .depth-rail-line{ margin-left: 20px; }
+    .depth-label{ font-size: 0; }
+    .zone-list{ gap: 90px; }
+    .proses-grid{ grid-template-columns: 1fr; }
+    .grade-row{ grid-template-columns: 64px 1fr; row-gap: 8px; }
+    .grade-row .g-photo{ width: 64px; height: 64px; grid-row: 1 / 4; }
+    .grade-row .g-num, .grade-row .g-name, .grade-row .g-desc, .grade-row .g-grade{ grid-column: 2; }
+    .grade-head{ display:none; }
+    .dest-grid{ grid-template-columns: repeat(2,1fr); }
+    footer{ padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brandmark">TERIPANG <em>Nusantara</em></div>
+  <div class="nav-right">
+    <ul>
+      <li><a href="#zona" data-en="Habitat" data-zh="栖息地">Habitat</a></li>
+      <li><a href="#produk" data-en="Products" data-zh="产品">Produk</a></li>
+      <li><a href="#proses" data-en="Process" data-zh="工艺">Proses</a></li>
+      <li><a href="#kontak" data-en="Contact" data-zh="联系我们">Kontak</a></li>
+    </ul>
+    <div class="lang-toggle" id="langToggle">
+      <span data-lang="id" class="active">ID</span><span data-lang="en">EN</span><span data-lang="zh">中文</span>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-silt"></div>
+  <div class="hero-eyebrow" data-en="A sea cucumber collector and dryer from Eastern Indonesian waters — the Aru, Kei, and Wakatobi islands." data-zh="来自印度尼西亚东部海域——阿鲁、凯伊和瓦卡托比群岛——的海参采集与晾晒商。">Pengumpul &amp; pengering teripang dari perairan Indonesia Timur — Kepulauan Aru, Kei, dan Wakatobi.</div>
+  <h1 data-en="From the seafloor of Indonesia,<br>to tables around the <span class=&quot;i&quot;>world</span>." data-zh="来自印度尼西亚的海底，<br>走向<span class=&quot;i&quot;>世界</span>的餐桌。">Dari dasar laut Indonesia,<br>ke meja <span class="i">dunia</span>.</h1>
+  <div class="hero-foot">
+    <p class="hero-desc" data-en="We work with more than 200 traditional fishermen to harvest, process, and dry sea cucumber to export quality — without damaging the reef it calls home." data-zh="我们与200多位传统渔民合作，共同捕捞、加工并晾晒达到出口品质的海参——同时不破坏它们赖以生存的珊瑚礁。">Kami bekerja bersama lebih dari 200 nelayan tradisional untuk mengangkat, mengolah, dan mengeringkan teripang dengan mutu ekspor — tanpa merusak terumbu tempat ia hidup.</p>
+    <div class="depth-tag" data-en="Operating at depths of 3–40 meters" data-zh="作业深度为3至40米">Beroperasi di kedalaman 3–40 meter</div>
+  </div>
+</section>
+
+<section class="zones" id="zona">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-en="Its home spans every depth" data-zh="它的家遍布每一个深度">Rumahnya ada di setiap kedalaman</h2>
+      <p data-en="Sea cucumbers inhabit nearly every layer of the archipelago's shallow seafloor. Each depth shapes a different texture and quality of flesh." data-zh="海参几乎栖息在群岛浅海海底的每一层。不同深度造就了不同的肉质与口感。">Teripang menghuni hampir seluruh lapisan dasar laut dangkal Nusantara. Setiap kedalaman membentuk tekstur dan kualitas daging yang berbeda.</p>
+    </div>
+    <div class="zones-inner">
+      <div class="depth-rail">
+        <div class="depth-rail-line" id="rail">
+          <div class="depth-marker" style="top:0%"></div>
+          <div class="depth-label" style="top:-6px">0 m</div>
+          <div class="depth-marker" style="top:33%"></div>
+          <div class="depth-label" style="top:27%">12 m</div>
+          <div class="depth-marker" style="top:66%"></div>
+          <div class="depth-label" style="top:60%">25 m</div>
+          <div class="depth-marker" style="top:100%"></div>
+          <div class="depth-label" style="top:94%">40 m</div>
+        </div>
+      </div>
+      <div class="zone-list">
+        <div class="zone" data-depth="0">
+          <span class="z-index" data-en="0–5 meters — seagrass meadow" data-zh="0–5米——海草床">0–5 meter — padang lamun</span>
+          <h3 data-en="Sandfish Sea Cucumber" data-zh="沙参">Teripang Pasir</h3>
+          <p data-en="Lives on shallow sandy flats near shore, easy to reach at low tide. This species grows quickly and is the main catch for beginner fishermen." data-zh="生活在近岸浅沙滩，退潮时容易采集。这种海参生长迅速，是新手渔民的主要渔获。">Hidup di rataan pasir dangkal dekat pantai, mudah dijangkau saat surut. Jenis ini tumbuh cepat dan menjadi hasil tangkapan utama nelayan pemula.</p>
+        </div>
+        <div class="zone" data-depth="1">
+          <span class="z-index" data-en="8–18 meters — reef drop-off" data-zh="8–18米——礁石陡坡">8–18 meter — tubir karang</span>
+          <h3 data-en="Pineapple &amp; Teatfish Sea Cucumber" data-zh="凤梨参与白乳参">Teripang Nanas &amp; Teripang Susu</h3>
+          <p data-en="Attaches to branching coral crevices. Harvesting requires experienced divers and only happens during calm-water season, March to October." data-zh="附着在分枝珊瑚的缝隙中，采捕需要经验丰富的潜水员，且只在3月至10月的平静水域季节进行。">Menempel di celah karang bercabang. Pengambilannya memerlukan penyelam berpengalaman dan hanya dilakukan pada musim air tenang, Maret hingga Oktober.</p>
+        </div>
+        <div class="zone" data-depth="2">
+          <span class="z-index" data-en="20–40 meters — outer slope" data-zh="20–40米——外礁斜坡">20–40 meter — lereng luar</span>
+          <h3 data-en="Golden Gamat &amp; Koro Sea Cucumber" data-zh="金玉参与蚝参">Teripang Gamat &amp; Koro</h3>
+          <p data-en="A high-value species for health extracts, living on steeper reef slopes. Harvested in limited amounts to keep the breeding population sustainable." data-zh="高价值的保健萃取品种，生活在较陡的礁石斜坡上。采捕数量有限，以维持种群的可持续繁殖。">Jenis bernilai tinggi untuk ekstrak kesehatan, hidup di lereng karang yang lebih curam. Diambil terbatas untuk menjaga populasi induk tetap lestari.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="produk" id="produk">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-en="Four grades of processed product" data-zh="四种加工等级">Empat kelas hasil olahan</h2>
+      <p data-en="Every grade is dried and sorted to the standards of buyers in Hong Kong, Singapore, and Southern China." data-zh="每个等级都按照香港、新加坡及中国南方买家的标准进行晾晒与分级。">Setiap kelas dikeringkan dan disortir sesuai standar pembeli di Hong Kong, Singapura, dan Tiongkok Selatan.</p>
+    </div>
+    <div class="grade-table">
+      <div class="grade-head">
+        <span data-en="Photo" data-zh="照片">Foto</span><span data-en="No." data-zh="编号">Kelas</span><span data-en="Species" data-zh="品种">Jenis</span><span data-en="Character" data-zh="特点">Karakter</span><span data-en="Grade" data-zh="等级">Grade</span>
+      </div>
+      <div class="grade-row">
+        <div class="g-photo"></div>
+        <span class="g-num">01</span>
+        <span class="g-name" data-en="Sandfish Sea Cucumber<span>Holothuria scabra</span>" data-zh="沙参<span>Holothuria scabra</span>">Teripang Pasir<span>Holothuria scabra</span></span>
+        <span class="g-desc" data-en="Thick flesh, low salt content after a three-stage drying process. A favorite for soups and restaurant dishes." data-zh="肉质厚实，经过三段式晾晒后含盐量低，是煲汤及餐厅菜肴的首选。">Daging tebal, kadar garam rendah setelah pengeringan tiga tahap. Favorit untuk sup dan hidangan restoran.</span>
+        <span class="g-grade">Premium</span>
+      </div>
+      <div class="grade-row">
+        <div class="g-photo"></div>
+        <span class="g-num">02</span>
+        <span class="g-name" data-en="Pineapple Sea Cucumber<span>Thelenota ananas</span>" data-zh="凤梨参<span>Thelenota ananas</span>">Teripang Nanas<span>Thelenota ananas</span></span>
+        <span class="g-desc" data-en="Coarse texture with its signature soft spines; large size makes it ideal for whole-piece presentation." data-zh="质地粗犷，带有标志性的软刺；体型大，适合整只呈现。">Bertekstur kasar dengan duri lembut khas, ukuran besar sehingga cocok untuk penyajian utuh.</span>
+        <span class="g-grade">Grade A</span>
+      </div>
+      <div class="grade-row">
+        <div class="g-photo"></div>
+        <span class="g-num">03</span>
+        <span class="g-name" data-en="Teatfish Sea Cucumber<span>Holothuria fuscogilva</span>" data-zh="白乳参<span>Holothuria fuscogilva</span>">Teripang Susu<span>Holothuria fuscogilva</span></span>
+        <span class="g-desc" data-en="Whitish color with high collagen content. Sought after by the cosmetics industry as well as culinary buyers." data-zh="颜色偏白，胶原蛋白含量高，深受化妆品行业与餐饮买家青睐。">Warna keputihan, kadar kolagen tinggi. Diminati industri kosmetik selain kuliner.</span>
+        <span class="g-grade">Grade A</span>
+      </div>
+      <div class="grade-row">
+        <div class="g-photo"></div>
+        <span class="g-num">04</span>
+        <span class="g-name" data-en="Golden Gamat<span>Liquid extract</span>" data-zh="金玉参<span>液体萃取</span>">Gamat Emas<span>Ekstrak cair</span></span>
+        <span class="g-desc" data-en="Processed fresh without full drying, packaged as a wound-care and immunity supplement." data-zh="新鲜加工，不完全晾干，包装成伤口护理与免疫力保健品。">Diproses segar tanpa pengeringan penuh, dikemas sebagai suplemen luka dan daya tahan tubuh.</span>
+        <span class="g-grade" data-en="Extract" data-zh="萃取液">Ekstrak</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proses" id="proses">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-en="How sea cucumber reaches our warehouse" data-zh="海参如何送达我们的仓库">Bagaimana teripang sampai ke gudang kami</h2>
+      <p data-en="Three stages we control strictly, from sea to package." data-zh="从海洋到包装，我们严格把控三个阶段。">Tiga tahap yang kami jaga ketat, dari laut sampai kemasan.</p>
+    </div>
+    <div class="proses-grid">
+      <div class="proses-item">
+        <span class="p-mark" data-en="Harvest" data-zh="采捕">Ambil</span>
+        <h3 data-en="Traditional diving" data-zh="传统潜水">Penyelaman tradisional</h3>
+        <p data-en="Partner fishermen dive without compressors, taking only adult individuals above 18 cm so the population keeps breeding." data-zh="合作渔民不使用压缩机潜水，只采捕体长18厘米以上的成体，以确保种群持续繁殖。">Nelayan mitra menyelam tanpa kompresor, mengambil hanya individu dewasa di atas 18 cm agar populasi tetap bertelur.</p>
+      </div>
+      <div class="proses-item">
+        <span class="p-mark" data-en="Boil" data-zh="水煮">Rebus</span>
+        <h3 data-en="Boiling &amp; slitting" data-zh="水煮与剖开">Perebusan &amp; sayat</h3>
+        <p data-en="Within two hours of being caught, sea cucumbers are boiled in clean seawater then slit open to remove sand and internal debris." data-zh="捕获后两小时内，用干净海水煮沸海参，再剖开去除泥沙与内脏杂质。">Dalam dua jam setelah diangkat, teripang direbus dengan air laut bersih lalu disayat untuk mengeluarkan pasir dan kotoran dalamnya.</p>
+      </div>
+      <div class="proses-item">
+        <span class="p-mark" data-en="Dry" data-zh="晾晒">Jemur</span>
+        <h3 data-en="Staged drying" data-zh="分阶段晾晒">Pengeringan bertahap</h3>
+        <p data-en="Dried on bamboo racks for 4–6 days, interspersed with light smoking so it keeps for up to two years without preservatives." data-zh="在竹架上晾晒4至6天，期间辅以轻度烟熏，无需防腐剂即可保存长达两年。">Dijemur di atas rak bambu selama 4–6 hari, diselingi pengasapan ringan agar tahan simpan hingga dua tahun tanpa pengawet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="jangkauan">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-en="Where this catch sails to" data-zh="这些渔获销往何处">Ke mana hasil laut ini berlayar</h2>
+      <p data-en="Most of our shipments cross to markets that have long known sea cucumber as both food and medicine." data-zh="我们的大部分货物销往那些长期将海参视为食品与药材的市场。">Sebagian besar kiriman kami menyeberang ke pasar yang sudah lama mengenal teripang sebagai bahan pangan dan pengobatan.</p>
+    </div>
+    <div class="dest-grid">
+      <div class="dest"><div class="d-country">Hong Kong</div><div class="d-use" data-en="High-end restaurants &amp; dried goods pharmacies" data-zh="高端餐厅与海味药材行">Restoran kelas atas &amp; toko obat kering</div></div>
+      <div class="dest"><div class="d-country">Guangzhou</div><div class="d-use" data-en="Wholesale distributors for festive dishes" data-zh="节庆菜肴批发商">Distributor grosir hidangan perayaan</div></div>
+      <div class="dest"><div class="d-country" data-en="Singapore" data-zh="新加坡">Singapura</div><div class="d-use" data-en="Traditional Chinese medicine shops" data-zh="中药行">Toko obat tradisional Tionghoa</div></div>
+      <div class="dest"><div class="d-country">Taiwan</div><div class="d-use" data-en="Health supplement manufacturers" data-zh="保健品生产商">Produsen suplemen kesehatan</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontak">
+  <div class="wrap">
+    <h2 data-en="Want to order or become a fishing partner?" data-zh="想要订购，或成为合作渔民？">Ingin memesan atau menjadi mitra nelayan?</h2>
+    <div class="contact-row">
+      <div class="contact-block">
+        <strong data-en="Office &amp; warehouse" data-zh="办公室与仓库">Kantor &amp; gudang</strong>
+        Jl. Pelabuhan Perikanan No. 7<br>
+        Tual, Maluku Tenggara, Indonesia
+      </div>
+      <div class="contact-block">
+        <strong data-en="Contact us" data-zh="联系我们">Hubungi kami</strong>
+        ekspor@teripangnusantara.id<br>
+        +62 812 0000 0000
+      </div>
+      <div class="contact-block">
+        <strong data-en="Operating hours" data-zh="营业时间">Jam operasional</strong>
+        <span data-en="Monday – Saturday" data-zh="周一至周六">Senin – Sabtu</span><br>
+        <span data-en="8 AM – 4 PM WIT" data-zh="上午8点至下午4点（东印尼时间）">08.00 – 16.00 WIT</span>
+      </div>
+      <div class="cta-group">
+        <strong class="cta-label" data-en="Sea Cucumber Price Request" data-zh="海参询价">Permintaan Harga Teripang</strong>
+        <p class="cta-hint" data-en="Location sharing is mandatory — share it first so the WhatsApp and email buttons can be used." data-zh="必须先分享您的位置，WhatsApp与邮件按钮才能使用。">Wajib membagikan lokasi — bagikan dulu agar tombol WhatsApp dan email bisa digunakan.</p>
+
+        <a class="cta-btn cta-btn-solid cta-disabled" id="waBtn" target="_blank" rel="noopener"
+           href="#" data-en="Send via WhatsApp" data-zh="通过WhatsApp发送">Kirim via WhatsApp</a>
+        <a class="cta-btn cta-disabled" id="emailBtn" href="#"
+           data-en="Send via email" data-zh="通过邮件发送">Kirim via email</a>
+
+        <button type="button" class="cta-btn cta-loc-btn" id="shareLocBtn"
+          data-en="📍 Share my location (mandatory — required before sending WhatsApp or email)" data-zh="📍分享我的位置（必填——发送WhatsApp或邮件前必须完成）">📍 Bagikan lokasi saya (wajib diisi sebelum kirim WA/Email)</button>
+        <span class="loc-status" id="locStatus"></span>
+        <div class="loc-proof" id="locProof"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-en="© 2026 Teripang Nusantara. Seafood harvested with care." data-zh="© 2026 Teripang Nusantara。用心采捕的海产。">© 2026 Teripang Nusantara. Hasil laut yang dipanen dengan sadar.</span>
+  <span data-en="CITES &amp; SNI Fisheries Certified" data-zh="通过CITES与印尼国家标准（SNI）渔业认证">Bersertifikat CITES &amp; SNI Perikanan</span>
+</footer>
+
+<script>
+  const zones = document.querySelectorAll('.zone');
+  const markers = document.querySelectorAll('.depth-marker');
+  const labels = document.querySelectorAll('.depth-label');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = [...zones].indexOf(e.target);
+        markers.forEach(m=>m.classList.remove('active'));
+        labels.forEach(l=>l.classList.remove('active'));
+        if(markers[idx]) markers[idx].classList.add('active');
+        if(labels[idx]) labels[idx].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  zones.forEach(z=>io.observe(z));
+
+  // Toggle bahasa ID / EN / 中文
+  const langToggle = document.getElementById('langToggle');
+  const langSpans = langToggle.querySelectorAll('span');
+  const translatable = document.querySelectorAll('[data-en]');
+  let currentLang = 'id';
+
+  function setLang(lang){
+    if(lang === currentLang) return;
+    currentLang = lang;
+    translatable.forEach(el=>{
+      if(!('id' in el.dataset)){
+        el.dataset.id = el.innerHTML; // simpan teks asli sekali saja
+      }
+      if(lang === 'en'){
+        el.innerHTML = el.dataset.en;
+      } else if(lang === 'zh'){
+        el.innerHTML = el.dataset.zh || el.dataset.en || el.dataset.id;
+      } else {
+        el.innerHTML = el.dataset.id;
+      }
+    });
+    langSpans.forEach(s=> s.classList.toggle('active', s.dataset.lang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  langSpans.forEach(s=>{
+    s.addEventListener('click', ()=> setLang(s.dataset.lang));
+  });
+
+  // Wajib bagikan lokasi sebelum tombol WhatsApp / email aktif
+  const shareLocBtn = document.getElementById('shareLocBtn');
+  const locStatus = document.getElementById('locStatus');
+  const locProof = document.getElementById('locProof');
+  const waBtn = document.getElementById('waBtn');
+  const emailBtn = document.getElementById('emailBtn');
+
+  const WA_NUMBER = '6281200000000';
+  const EMAIL_ADDR = 'ekspor@teripangnusantara.id';
+
+  // GANTI dengan URL Web App dari Google Apps Script Anda (lihat panduan yang disertakan).
+  // Biarkan string kosong '' kalau belum mau mengaktifkan pencatatan ke Google Sheet.
+  const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKQUQG2uISG8wbHI5sZIV0mo0VEStnePgC583vS5yBigK4c_h4lFRQHK1CM2oxTJ52/exec';
+
+  const baseMsg = {
+    id: 'Halo Teripang Nusantara, saya ingin meminta penawaran harga teripang.',
+    en: 'Hello Teripang Nusantara, I would like to request a sea cucumber price quote.',
+    zh: '您好 Teripang Nusantara，我想咨询海参的报价。'
+  };
+  const statusText = {
+    fetching: { id: 'Mengambil lokasi...', en: 'Getting location...', zh: '正在获取位置…' },
+    ok: { id: 'Lokasi berhasil dibagikan ✓', en: 'Location shared ✓', zh: '位置分享成功 ✓' },
+    denied: { id: 'Gagal mengambil lokasi. Izinkan akses lokasi lalu coba lagi.', en: 'Could not get location. Please allow location access and try again.', zh: '无法获取位置，请允许位置权限后重试。' },
+    unsupported: { id: 'Perangkat/browser tidak mendukung berbagi lokasi.', en: 'This device/browser does not support location sharing.', zh: '此设备/浏览器不支持位置分享功能。' }
+  };
+  const locationLabel = { id: 'Lokasi saya: ', en: 'My location: ', zh: '我的位置：' };
+  const refLabel = { id: 'Kode referensi: ', en: 'Reference code: ', zh: '参考编号：' };
+  const proofLabel = { id: 'Lokasi Anda tercatat:', en: 'Your location on record:', zh: '已记录您的位置：' };
+  const proofLink = { id: 'Lihat di peta', en: 'View on map', zh: '在地图上查看' };
+  const refProofLabel = { id: 'Kode referensi Anda:', en: 'Your reference code:', zh: '您的参考编号：' };
+
+  function buatKodeReferensi(){
+    const waktu = Date.now().toString(36).toUpperCase();
+    const acak = Math.random().toString(36).slice(2, 6).toUpperCase();
+    return `TRP-${waktu}-${acak}`;
+  }
+
+  shareLocBtn.addEventListener('click', ()=>{
+    if(!navigator.geolocation){
+      locStatus.textContent = statusText.unsupported[currentLang];
+      locStatus.className = 'loc-status error';
+      return;
+    }
+    locStatus.textContent = statusText.fetching[currentLang];
+    locStatus.className = 'loc-status';
+    navigator.geolocation.getCurrentPosition(
+      (pos)=>{
+        const { latitude, longitude } = pos.coords;
+        const mapsLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+        const kodeRef = buatKodeReferensi();
+        const fullMsg = baseMsg[currentLang] + '\n\n' +
+          locationLabel[currentLang] + mapsLink + '\n' +
+          refLabel[currentLang] + kodeRef;
+
+        waBtn.href = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(fullMsg)}`;
+        emailBtn.href = `mailto:${EMAIL_ADDR}?subject=${encodeURIComponent('Permintaan Harga Teripang')}&body=${encodeURIComponent(fullMsg)}`;
+
+        waBtn.classList.remove('cta-disabled');
+        emailBtn.classList.remove('cta-disabled');
+        shareLocBtn.classList.add('loc-done');
+        locStatus.textContent = statusText.ok[currentLang];
+        locStatus.className = 'loc-status ok';
+
+        // Bukti lokasi & kode referensi tampil langsung di halaman — tidak bergantung pada isi chat WA
+        locProof.innerHTML = `${proofLabel[currentLang]} <span class="coords">${latitude.toFixed(5)}, ${longitude.toFixed(5)}</span> — <a href="${mapsLink}" target="_blank" rel="noopener">${proofLink[currentLang]}</a><br>${refProofLabel[currentLang]} <span class="coords">${kodeRef}</span>`;
+
+        // Catat ke Google Sheet lewat Apps Script Web App (kalau sudah diisi)
+        if(GAS_ENDPOINT){
+          fetch(GAS_ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+              kodeRef, latitude, longitude, mapsLink,
+              lang: currentLang,
+              waktu: new Date().toISOString(),
+              halaman: 'Permintaan Harga Teripang'
+            })
+          }).catch(()=>{ /* diabaikan diam-diam supaya tidak mengganggu alur utama */ });
+        }
+      },
+      ()=>{
+        locStatus.textContent = statusText.denied[currentLang];
+        locStatus.className = 'loc-status error';
+      }
+    );
+  });
+</script>
+
+</body>
+</html>
