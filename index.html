@@ -19,7 +19,7 @@
     --line: rgba(233,241,247,0.16);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
   body{
     background: var(--abyss);
     color: var(--sand);
@@ -88,14 +88,14 @@
   .hero h1{
     font-size: clamp(2.6rem, 7vw, 5.6rem);
     line-height: 1.02;
-    max-width: 15ch;
+    max-width: min(780px, 90vw);
     color: var(--sand);
   }
   .hero h1 .i{ font-style: italic; color: var(--clay-light); }
 
   /* Penyesuaian saat bahasa Inggris aktif — teks EN cenderung lebih panjang,
      jadi ukuran & lebar disesuaikan supaya jumlah baris tetap mirip versi ID */
-  html[lang="en"] .hero h1{ font-size: clamp(2.2rem, 6vw, 4.7rem); max-width: 18ch; }
+  html[lang="en"] .hero h1{ font-size: clamp(2.2rem, 6vw, 4.7rem); max-width: min(900px, 92vw); }
   html[lang="en"] .hero-desc{ max-width: 430px; }
   html[lang="en"] .hero-eyebrow{ max-width: 540px; }
   html[lang="en"] .sec-head h2{ font-size: clamp(1.6rem, 3vw, 2.35rem); }
