@@ -161,14 +161,15 @@
     display:grid; grid-template-columns: 96px 60px 1.3fr 1.6fr 90px; gap: 28px;
     padding-bottom: 18px; font-size: 0.75rem; color: var(--sand-dim); opacity: 0.6;
   }
-  /* Slot foto produk — taruh <img src="nama-file-anda.jpg" alt="..."> di dalam div.g-photo */
+  /* Slot foto/video produk — taruh <img src="nama-file.jpg" alt="..."> ATAU
+     <video autoplay muted loop playsinline><source src="nama-file.mp4"></video> di dalam div.g-photo */
   .g-photo{
     width: 96px; height: 96px; overflow: hidden; flex-shrink:0;
     background: var(--mid-teal);
     display:flex; align-items:center; justify-content:center;
     border: 1px solid var(--line);
   }
-  .g-photo img{ width:100%; height:100%; object-fit: cover; display:block; }
+  .g-photo img, .g-photo video{ width:100%; height:100%; object-fit: cover; display:block; }
   .g-photo:empty::after{
     content: '+ foto'; font-size: 0.7rem; color: var(--sand-dim); letter-spacing: 0.02em;
   }
@@ -241,10 +242,10 @@
   @media (max-width: 860px){
     .wrap{ padding: 0 24px; }
     nav{ padding: 20px 24px; }
-    .nav-right{ gap: 10px; }
-    nav ul{ gap: 12px; font-size: 0.68rem; }
+    .nav-right{ gap: 10px; flex-wrap: wrap; row-gap: 8px; justify-content: flex-end; }
+    nav ul{ gap: 10px 12px; font-size: 0.68rem; flex-wrap: wrap; flex-shrink: 0; }
     nav ul li, nav a{ white-space: nowrap; }
-    .lang-toggle{ font-size: 0.68rem; }
+    .lang-toggle{ font-size: 0.68rem; flex-shrink: 0; }
     .lang-toggle span{ padding: 4px 9px; }
     .hero{ padding: 0 24px 60px; }
     .zones-inner{ gap: 24px; }
@@ -456,21 +457,17 @@
         Tual, Maluku Tenggara, Indonesia
       </div>
       <div class="contact-block">
-        <strong data-en="Contact us" data-zh="联系我们">Hubungi kami</strong>
-        ekspor@teripangnusantara.id<br>
-        +62 812 0000 0000
-      </div>
-      <div class="contact-block">
         <strong data-en="Operating hours" data-zh="营业时间">Jam operasional</strong>
         <span data-en="Monday – Saturday" data-zh="周一至周六">Senin – Sabtu</span><br>
         <span data-en="8 AM – 4 PM WIT" data-zh="上午8点至下午4点（东印尼时间）">08.00 – 16.00 WIT</span>
       </div>
       <div class="cta-group">
-        <strong class="cta-label" data-en="Sea Cucumber Price Request" data-zh="海参询价">Permintaan Harga Teripang</strong>
+        <strong class="cta-label" data-en="Contact Us" data-zh="联系我们">Hubungi Kami</strong>
         <p class="cta-hint" data-en="Location sharing is mandatory — share it first so the WhatsApp and email buttons can be used." data-zh="必须先分享您的位置，WhatsApp与邮件按钮才能使用。">Wajib membagikan lokasi — bagikan dulu agar tombol WhatsApp dan email bisa digunakan.</p>
 
         <a class="cta-btn cta-btn-solid cta-disabled" id="waBtn" target="_blank" rel="noopener"
            href="#" data-en="Send via WhatsApp" data-zh="通过WhatsApp发送">Kirim via WhatsApp</a>
+
         <a class="cta-btn cta-disabled" id="emailBtn" href="#"
            data-en="Send via email" data-zh="通过邮件发送">Kirim via email</a>
 
@@ -484,7 +481,7 @@
 </section>
 
 <footer>
-  <span data-en="© 2026 Teripang Nusantara. Seafood harvested with care." data-zh="© 2026 Teripang Nusantara。用心采捕的海产。">© 2026 Teripang Nusantara. Hasil laut yang dipanen dengan sadar.</span>
+  <span data-en="© 2026 Ardani Group Sea Cucumber Premium. Seafood harvested with care." data-zh="© 2026 Ardani Group Sea Cucumber Premium。用心采捕的海产。">© 2026 Ardani Group Sea Cucumber Premium. Hasil laut yang dipanen dengan sadar.</span>
   <span data-en="CITES &amp; SNI Fisheries Certified" data-zh="通过CITES与印尼国家标准（SNI）渔业认证">Bersertifikat CITES &amp; SNI Perikanan</span>
 </footer>
 
@@ -541,17 +538,17 @@
   const waBtn = document.getElementById('waBtn');
   const emailBtn = document.getElementById('emailBtn');
 
-  const WA_NUMBER = '6285205332047';
-  const EMAIL_ADDR = 'ArdaniGroup20@gmail.com';
+  const WA_NUMBER = '6281200000000';
+  const EMAIL_ADDR = 'ekspor@teripangnusantara.id';
 
   // GANTI dengan URL Web App dari Google Apps Script Anda (lihat panduan yang disertakan).
   // Biarkan string kosong '' kalau belum mau mengaktifkan pencatatan ke Google Sheet.
   const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKQUQG2uISG8wbHI5sZIV0mo0VEStnePgC583vS5yBigK4c_h4lFRQHK1CM2oxTJ52/exec';
 
   const baseMsg = {
-    id: 'Halo Teripang Nusantara, saya ingin meminta penawaran harga teripang.',
-    en: 'Hello Teripang Nusantara, I would like to request a sea cucumber price quote.',
-    zh: '您好 Teripang Nusantara，我想咨询海参的报价。'
+    id: 'Halo Ardani Group Sea Cucumber Premium, saya ingin meminta penawaran harga teripang.',
+    en: 'Hello Ardani Group Sea Cucumber Premium, I would like to request a sea cucumber price quote.',
+    zh: '您好 Ardani Group Sea Cucumber Premium，我想咨询海参的报价。'
   };
   const statusText = {
     fetching: { id: 'Mengambil lokasi...', en: 'Getting location...', zh: '正在获取位置…' },
